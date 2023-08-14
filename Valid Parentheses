@@ -1,0 +1,27 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        int len = s.length();   
+        string last_open; 
+        last_open.push_back(s[0]); 
+
+        map<char, char> complete = {
+            {  ')', '(' },   {  '}', '{' },  {  ']', '[' }
+        };
+
+        for(int i = 1; i<len; i++){
+            if(s[i]=='(' || s[i]=='{' || s[i]=='['){
+                last_open.push_back(s[i]); 
+            } 
+            else{
+                if(complete[s[i]]!=last_open.back()) return false; 
+                else last_open.pop_back();
+            }
+            
+        } 
+
+        if(last_open.length()==0) return true; 
+        else return false; 
+
+    }
+};
